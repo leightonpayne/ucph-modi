@@ -8,4 +8,4 @@ The MPI Oriented Development and Investigation (MODI) cluster is a relative smal
 
 As a UCPH employee or student, you should already be able to access the Electronic Research Data Archive (ERDA) service at https://erda.dk/, by clickng **log in**.
 
-[log_in](img/log_in.png)
+![log_in](img/log_in.png)
