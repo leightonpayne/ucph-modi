@@ -1,38 +1,63 @@
 # Basic Concepts
 
+# Basic Concepts
+
 ## HPC Architecture
 
-A computing cluster is a network of computers called *nodes*.
+High-Performance Computing (HPC) systems are designed to process large-scale computational workloads by distributing tasks across multiple machines. These systems typically consist of a **computing cluster**, which is a network of interconnected computers called **nodes**.
 
-When you log into the cluster, you are dropped into the *login* node. The real work on a cluster gets done by separate *compute* nodes.
+HPC clusters have different types of nodes, each serving a specific function:
 
-Interaction between the *login* node and the *compute* nodes is handled by special software called a scheduler (SLURM is a type of scheduler, [discussed further below](#slurm)).
+- **Login Nodes**
+  - When you access the cluster, you are placed on a **login node**.
+  - These nodes are meant for **code development, job submission, and lightweight tasks** (e.g., editing scripts, compiling programs, data transfer).
 
-Nodes are allocated to *partitions*, which group them into logical sets. These can be overlapping, but may also for example, separate CPU focused nodes from GPU focused nodes. When you submit a job for execution, you will submit it to a specific *partition*.
+- **Compute Nodes**
+  - These are the nodes where actual computations take place.
+  - Jobs are **submitted** to compute nodes via a **job scheduler** (explained below).
+
+### Job Scheduling and Resource Management
+
+Because many users share an HPC system, a **scheduler** manages access to compute resources.
+
+- **Schedulers** allocate jobs based on resource requests (CPU, memory, time, etc.) and **queue them** based on priority, availability, and system policies.
+- **SLURM** is the job scheduler used in MODI. It handles **job submission, queuing, execution, and monitoring**.
+- When submitting a job, you specify the required **compute resources** (number of CPUs, amount of memory, time limit, etc.). The scheduler then assigns a compute node based on availability and priority.
+
+> **Important:**  
+> Submitting jobs with excessive resource requests can lead to **longer wait times**. Efficient resource requests lead to better scheduling for all users.
+
+### Partitions and Job Priorities
+
+Nodes in an HPC cluster are grouped into **partitions** (sometimes called queues).
+
+- Partitions help to organize resources based on different job types.
+- Jobs in partitions with **higher priority** will run before jobs in lower-priority partitions when resources are limited.
 
 ## MODI's Architecture
 
-MODI has 8 *compute* nodes, each with 32 CPUs (64 threads) and 256GB memory. 
+The **MODI HPC cluster** consists of **8 compute nodes**, each equipped with: **32 CPU cores** (64 threads) and **256 GB of RAM**
 
-> [!NOTE]
-> Two of these nodes `n[000-001]` are only allocated to the partition `modi_HPPC`, this partition is also linked to all other nodes and has the highest priority, but has a max walltime of only 5 minutes. I think this partition is specifically set up for HPC training courses, and is probably otherwise not overly useful.
+### MODI’s Compute Partitions
 
-The remaining 6 nodes `n[002-007]` are allocated to four other partitions.
+MODI uses partitions to allocate computing resources based on workload type and priority.
 
-| partition              | nodes            | priority | max time                |
-|------------------------|------------------|----------|-------------------------|
-| `modi_HPPC`            | `n[000-007]` (8) | 20       | `00:05:00`              |
-| `modi_devel` (default) | `n[002-007]` (6) | 10       | `00:15:00`              |
-| `modi_short`           | `n[002-007]` (6) | 5        | `2-00:00:00` (2 days)   |
-| `modi_long`            | `n[002-007]` (6) | 3        | `7-00:00:00` (1 week)   |
-| `modi_max`             | `n[002-007]` (6) | 1        | `31-00:00:00` (1 month) |
+| **Partition**          | **Nodes**        | **Priority** | **Max Wall Time**       | **Use Case**                                      |
+|------------------------|------------------|--------------|-------------------------|---------------------------------------------------|
+| `modi_HPPC`            | `n[000-007]` (8) | 20           | `00:05:00` (5 min)      | High-priority short tests (used for HPC training) |
+| `modi_devel` (default) | `n[002-007]` (6) | 10           | `00:15:00` (15 min)     | Short debugging & development runs                |
+| `modi_short`           | `n[002-007]` (6) | 5            | `2-00:00:00` (2 days)   | Standard short-duration jobs                      |
+| `modi_long`            | `n[002-007]` (6) | 3            | `7-00:00:00` (1 week)   | Longer-running jobs                               |
+| `modi_max`             | `n[002-007]` (6) | 1            | `31-00:00:00` (1 month) | Extended computations                             |
 
-Since the partitions handle overlapping nodes, they can be (and are) used as a means of assigning priority to jobs, based on their maximum walltime.
-
-When all resources are in use, jobs with a higher priority will be placed in the queue ahead of those with a lower priority. I.e., if you can, request less resources to get your jobs running sooner. This only really matters when the cluster is busy, but it's also good practice (and ettiquette) to only request the resources that you need. In some HPC systems (not this one) you get penalised for excessive resource usage, reducing your overall priority.
+- **Higher priority** means a job will be scheduled ahead of lower-priority jobs when resources are limited.
+- The **`modi_HPPC` partition** has the highest priority but a **maximum wall time of 5-minutes**, I'm pretty sure this partition is just used for HPC training cources.
+- The **default partition (`modi_devel`)** allows up to **15 minutes** and is best for debugging.
+- **The longer the wall time, the lower the priority.** Jobs in `modi_long` and `modi_max` may experience longer queue times when the cluster is busy.
+- Request only the resources you need. Large requests (e.g., entire nodes or long runtimes) may delay job execution.
 
 > [!TIP]
-> For more information, refer to the [User Guide – 5](https://oidc.erda.dk/public/MODI-user-guide.pdf#4.3=&page=4.53)
+> For more information about partitions, refer to the [User Guide – Part 5](https://oidc.erda.dk/public/MODI-user-guide.pdf#4.3=&page=4.53)
 
 ## MODI's Special Directories
 
@@ -46,7 +71,8 @@ between the MODI and ERDA systems, at any point in time the access speed can flu
 - `modi_images` contains pre-built Singularity images for use when executing SLURM jobs that require special libraries that are not preinstalled on the compute nodes (for example, `conda`). This is [discussed further below](#slurm)).
 
 > [!TIP]
-> For more information, refer to the [User Guide – 4.2](https://oidc.erda.dk/public/MODI-user-guide.pdf#4.3=&page=4.29)
+> For more information about MODI directories, refer to the [User Guide – Part 4.2](https://oidc.erda.dk/public/MODI-user-guide.pdf#4.3=&page=4.29)
 
 ## SLURM
 
+...
