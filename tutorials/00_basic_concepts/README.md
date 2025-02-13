@@ -29,7 +29,7 @@ The remaining 6 nodes `n[002-007]` are allocated to four other partitions.
 
 Since the partitions handle overlapping nodes, they can be (and are) used as a means of assigning priority to jobs, based on their maximum walltime.
 
-When all resources are in use, jobs with a higher priority will be placed in the queue ahead of those with a lower priority. I.e., if you can, request less resources to get your jobs running sooner. This only really matters when the cluster is busy, but it's also good practice (and ettiquette) to only request the resources that you need.
+When all resources are in use, jobs with a higher priority will be placed in the queue ahead of those with a lower priority. I.e., if you can, request less resources to get your jobs running sooner. This only really matters when the cluster is busy, but it's also good practice (and ettiquette) to only request the resources that you need. In some HPC systems (not this one) you get penalised for excessive resource usage, reducing your overall priority.
 
 > [!TIP]
 > For more information, refer to the [User Guide – 5](https://oidc.erda.dk/public/MODI-user-guide.pdf#4.3=&page=4.53)
