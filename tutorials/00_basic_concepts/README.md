@@ -1,7 +1,5 @@
 # Basic Concepts
 
-# Basic Concepts
-
 ## HPC Architecture
 
 High-Performance Computing (HPC) systems are designed to process large-scale computational workloads by distributing tasks across multiple machines. These systems typically consist of a **computing cluster**, which is a network of interconnected computers called **nodes**.
@@ -24,7 +22,7 @@ Because many users share an HPC system, a **scheduler** manages access to comput
 - **SLURM** is the job scheduler used in MODI. It handles **job submission, queuing, execution, and monitoring**.
 - When submitting a job, you specify the required **compute resources** (number of CPUs, amount of memory, time limit, etc.). The scheduler then assigns a compute node based on availability and priority.
 
-> **Important:**  
+> [!NOTE]
 > Submitting jobs with excessive resource requests can lead to **longer wait times**. Efficient resource requests lead to better scheduling for all users.
 
 ### Partitions and Job Priorities
@@ -36,7 +34,7 @@ Nodes in an HPC cluster are grouped into **partitions** (sometimes called queues
 
 ## MODI's Architecture
 
-The **MODI HPC cluster** consists of **8 compute nodes**, each equipped with: **32 CPU cores** (64 threads) and **256 GB of RAM**
+The **MODI HPC cluster** consists of **8 compute nodes**, each equipped with **32 CPU cores** (64 threads) and **256 GB of RAM**
 
 ### MODI’s Compute Partitions
 
@@ -53,7 +51,6 @@ MODI uses partitions to allocate computing resources based on workload type and 
 - **Higher priority** means a job will be scheduled ahead of lower-priority jobs when resources are limited.
 - The **`modi_HPPC` partition** has the highest priority but a **maximum wall time of 5-minutes**, I'm pretty sure this partition is just used for HPC training cources.
 - The **default partition (`modi_devel`)** allows up to **15 minutes** and is best for debugging.
-- **The longer the wall time, the lower the priority.** Jobs in `modi_long` and `modi_max` may experience longer queue times when the cluster is busy.
 - Request only the resources you need. Large requests (e.g., entire nodes or long runtimes) may delay job execution.
 
 > [!TIP]
