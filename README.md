@@ -6,7 +6,7 @@ The **MPI Oriented Development and Investigation** (MODI) cluster is a relative 
 
 ## How to sign up
 
-As a UCPH employee or student, you should already be able to access the **Electronic Research Data Archive** (ERDA) service at https://erda.dk/, by clickng **log in**.
+As a UCPH employee or student, you should already be able to access the **Electronic Research Data Archive** (ERDA) service at https://erda.dk/, by clicking **log in**.
 
 ![log_in](img/log_in.png)
 
@@ -22,11 +22,11 @@ There are two services available, the **Data Analysis Gateway** (DAG) and **MODI
 
 On the MODI tab there is some information about the cluster, and a link to the official [MODI user guide](https://oidc.erda.dk/public/MODI-user-guide.pdf).
 
-Click *Start MODI*.
+Click **Start MODI**.
 
 ![gateway_modi](img/gateway_modi.png)
 
-You will be presented with several server options. The default **HPC Notebook** is what you want. Click *Start*.
+You will be presented with several server options. The default "HPC Notebook" is what you want. Click **Start**.
 
 ![server_options](img/server_options.png)
 
@@ -34,8 +34,10 @@ On the next screen, click **Start My Server**.
 
 This will open a JupyterLab interface with several options. The most important parts of this interface are the file explorer on the sidebar and the **Terminal** button in the launcher.
 
-The file explorer lists the contents of your home directory on the server. To access the command line, click the **Terminal** button.
+To access the command line, click the **Terminal** button.
 
 ![modi_lab](img/modi_lab.png)
+
+## What next?
 
 To get started, familiarize yourself with the [Basic Concepts](tutorials/00_basic_concepts) or check out one of the other [Tutorials](tutorials).
