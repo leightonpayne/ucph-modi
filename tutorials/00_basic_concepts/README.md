@@ -50,7 +50,6 @@ MODI uses partitions to allocate computing resources based on workload type and 
 
 - **Higher priority** means a job will be scheduled ahead of lower-priority jobs when resources are limited.
 - The **`modi_HPPC` partition** has the highest priority but a **maximum wall time of 5-minutes**, I'm pretty sure this partition is just used for HPC training cources.
-- The **default partition (`modi_devel`)** allows up to **15 minutes** and is best for debugging.
 - Request only the resources you need. Large requests (e.g., entire nodes or long runtimes) may delay job execution.
 
 > [!TIP]
