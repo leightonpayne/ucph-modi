@@ -111,3 +111,6 @@ If you ever need to cancel a job, use `scancel`:
 ```bash
 scancel [JOB_ID]
 ```
+
+> [!TIP]
+> For more information about using SLURM on MODI, refer to the [User Guide – Part 6](https://oidc.erda.dk/public/MODI-user-guide.pdf#4.3=&page=6.15)
