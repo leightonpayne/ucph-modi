@@ -4,6 +4,8 @@ This first example gives a basic overview of submitting jobs from the *login* no
 
 ## Preparing the data
 
+Navigate to the tutorial directory:
+
 ```bash
 cd "~/modi_mount/ucph-modi/tutorials/01_hmmsearch"
 ```
@@ -16,7 +18,7 @@ First we will create a `conda` environment with the tools we're going to use. `c
 conda create -y --prefix "~/modi_mount/conda_envs/ucph-modi-01-hmmer" -c conda-forge -c bioconda parallel aria2 hmmer
 ```
 
-This will create an environment called `ucph-modi-01-hmmer`, and search the channels `conda-forge` and `bioconda` for `parallel`, `aria2`, and `hmmer`, installing them. By specifying the prefix as `~/modi_mount/conda_envs/`, we are ensuring that the environment is established in `modi_mount`, so it will be accessible to all *compute* nodes later on.
+This will create an environment called `ucph-modi-01-hmmer`, and install `parallel`, `aria2`, and `hmmer` from the `conda-forge` or `bioconda` repositories. By specifying the prefix in `~/modi_mount/conda_envs/`, we are ensuring that the environment is established in `modi_mount`, so it will be accessible to all *compute* nodes later on.
 
 Activate the environment:
 
@@ -26,7 +28,7 @@ conda activate "~/modi_mount/conda_envs/ucph-modi-01-hmmer"
 
 `parallel` is a great tool for splitting commands across multiple CPUs, it's useful on a regular computer with a handful of CPUs, but especially powerful when you can split jobs across tens or hundreds of CPUs on a cluster.
 
-By default, every time you run `parallel`, it prints citation information, to avoid this run the following command once, and agree:
+By default, every time you run `parallel`, it prints a citation reminder each time it runs, to suppress this run the following command and agree to the prompt to prevent further reminders:
 
 ```bash
 parallel --citation

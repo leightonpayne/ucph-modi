@@ -71,4 +71,43 @@ between the MODI and ERDA systems, at any point in time the access speed can flu
 
 ## SLURM
 
-...
+### Job Submission
+
+Jobs are submitted to the **compute nodes** using the `sbatch` command and a **SLURM batch script**.
+
+Below is an example of a small SLURM script (a real example is described in more detail in [the first tutorial](../01_hmmsearch)):
+
+##### `test_job.slurm`
+
+```
+01 | #!/usr/bin/env bash
+02 | 
+03 | #SBATCH --partition=modi_devel
+04 | #SBATCH --job-name=test_job
+05 | #SBATCH --time=00:15:00
+06 | #SBATCH --cpus-per-task=4
+07 | #SBATCH --output=logs/%x_%A_%N_stdout.log
+08 | #SBATCH --error=logs/%x_%A_%N_stderr.log
+09 | 
+10 | echo "Starting job on $(hostname)"
+11 | sleep 60  # Simulate some workload
+12 | echo "Job complete"
+```
+
+To submit this script you would use `sbatch`:
+
+```bash
+sbatch test_job.slurm
+```
+
+SLURM will return a job ID number that you can use to check the status of the job:
+
+```bash
+squeue
+```
+
+If you ever need to cancel a job, use `scancel`:
+
+```bash
+scancel [JOB_ID]
+```
