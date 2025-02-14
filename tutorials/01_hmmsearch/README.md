@@ -128,7 +128,7 @@ Included in this section of the repo are two basic scripts:
 13 |
 14 | export -f hmmsearch_wrapper
 15 |
-16 | parallel --progress -j 32 'hmmsearch_wrapper {}' ::: $(find ${DIR}/faa -name "*.fasta")
+16 | parallel -j 32 'hmmsearch_wrapper {}' ::: $(find ${DIR}/faa -name "*.fasta")
 ```
 
 This is a regular `bash` script that you could also just run on your own laptop.
