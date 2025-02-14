@@ -4,10 +4,20 @@ This first example gives a basic overview of submitting jobs from the *login* no
 
 ## Preparing the data
 
+Clone this repository:
+
+```bash
+cd ~/modi_mount/
+```
+
+```bash
+git clone https://github.com/leightonpayne/ucph-modi
+```
+
 Navigate to the tutorial directory:
 
 ```bash
-cd "~/modi_mount/ucph-modi/tutorials/01_hmmsearch"
+cd ~/modi_mount/ucph-modi/tutorials/01_hmmsearch/
 ```
 
 Our initial retrieval and setup of data will not require a lot of computing power, so we can stick to using the *login* node for now.
@@ -109,7 +119,7 @@ Included in this section of the repo are two basic scripts:
 04 |
 05 | source "${CONDA_DIR}/etc/profile.d/conda.sh"
 06 |
-07 | conda activate ~/modi_mount/conda_envs/conda_test
+07 | conda activate ~/modi_mount/conda_envs/ucph-modi-01-hmmer
 08 |
 09 | function hmmsearch_wrapper() {
 10 |     local id=$(basename "${1%.fasta}")
