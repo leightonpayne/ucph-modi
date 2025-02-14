@@ -181,5 +181,15 @@ To check job status, use `squeue`:
 squeue
 ```
 
-> [!TIP]
-> For more information, refer to the [User Guide – 6.1](https://oidc.erda.dk/public/MODI-user-guide.pdf#4.3=&page=6.21)
+You should see your job at the top of the list, for example:
+
+```
+ JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+880708 modi_deve tutorial khr684_k  R       0:11      1 n003
+```
+
+The job should only take a few seconds to complete, so you might already have missed it appearing in the queue.
+
+You should now see a list of `*.domtblout` files in `domtblout`.
+
+You can also inspect the log files in `logs/`, the `*_stdout.log` file will contain all of the output returned by `hmmsearch`, the `*_stderr.log` should be empty if there were no errors.
