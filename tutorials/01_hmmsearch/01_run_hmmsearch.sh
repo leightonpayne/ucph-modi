@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-export DIR="~/modi_mount/ucph-modi/tutorials/01_hmmsearch"
+export DIR=~/modi_mount/ucph-modi/tutorials/01_hmmsearch
 
 source "${CONDA_DIR}/etc/profile.d/conda.sh"
 
-conda activate ~/modi_mount/conda_envs/conda_test
+conda activate ~/modi_mount/conda_envs/ucph-modi-01-hmmer
 
 function hmmsearch_wrapper() {
     local id=$(basename "${1%.fasta}")
@@ -13,4 +13,4 @@ function hmmsearch_wrapper() {
 
 export -f hmmsearch_wrapper
 
-parallel --progress -j 32 'hmmsearch_wrapper {}' ::: $(find ${DIR}/faa -name "*.fasta")
+parallel --progress -j 4 'hmmsearch_wrapper {}' ::: $(find ${DIR}/faa -name "*.fasta")
