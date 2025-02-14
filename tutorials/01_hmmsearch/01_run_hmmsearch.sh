@@ -13,4 +13,4 @@ function hmmsearch_wrapper() {
 
 export -f hmmsearch_wrapper
 
-parallel --progress -j 4 'hmmsearch_wrapper {}' ::: $(find ${DIR}/faa -name "*.fasta")
+parallel -j 32 'hmmsearch_wrapper {}' ::: $(find ${DIR}/faa -name "*.fasta")
